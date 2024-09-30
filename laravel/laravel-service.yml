@@ -4,10 +4,8 @@ metadata:
   name: laravel-service
   namespace: laravel
 spec:
-  type: LoadBalancer
   selector:
     app: laravel
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
+  - port: 8000
+  type: NodePort
