@@ -24,18 +24,18 @@
         ```bash
         kubectl get pods -n <namespace>
         ```
-    - Muestra pods en concreto:
+    - Muestra pod en concreto:
         ```bash
         kubectl describe pod <nombre-del-pod> -n <namespace>
         ```
 
-- Para verificar ip externa:
+- Para verificar que tiene ``ip externa`` se utliza el siguiente comando:
 
     ```bash
     kubectl get svc -n <namespace>
     ```
 
-- MySQL es la Base de Datos elegida para el ejercicio, creamos el archivo `mysql-deployment.yml` y el `mysql-service.yml`. Para la contraseña de la BBDD he creado un secreto en kubernetes llamado `mysql-secret` con el siguiente comando:
+- MySQL es la base de datos elegida para el ejercicio, creamos el archivo `mysql-deployment.yml` y el `mysql-service.yml`. Para la contraseña de la BBDD he creado un secreto en kubernetes llamado `mysql-secret` con el siguiente comando:
 
     ```bash
     kubectl create secret generic <nombre-secreto> --from-literal=MYSQL_ROOT_PASSWORD=<contraseña> -n <namespace>
@@ -53,7 +53,7 @@
     kubectl port-forward pod/<nombre_pod> <puerto_pod>:<puerto_local> -n <namespace>
     ```
 
-![alt text](images/portforward.png)
+![alt text](images/portforward-laravel.png)
 
 ![alt text](images/laravel.png)
 
@@ -65,5 +65,25 @@
     kubectl create namespace <nombre_namespace>
     ```
 
+- Lo siguiente es la creación de los archivos `phpmyadmin-deployment.yml` y `phpmyadmin-service.yml` y se aplican con los siguientes comandos:
 
+    ```bash
+    kubectl apply -f phpmyadmin-deployment.yml
+    ```
+    ```bash
+    kubectl apply -f phpmyadmin-service.yml
+    ```
 
+- También se van a hacer uso del archivo `mysql-service.yml`. Como este pertenece al namespace de `laravel` se utiliza de la siguiente manera:
+    ```
+    <nombre-archivo>.<namespace>
+    mysql-service.laravel
+    ```
+
+- Para que no pida autenticación, creamos de nuevo los secretos anteriores para se que conecte automáticamente a la base de datos, ya que no se pueden utilizar los mismos porque pertenecen a distintos `namespaces` y se encuentran aislados.
+
+- Por último, hacemos `port-forward` para poder acceder desde el navegador a la base de datos:
+
+![alt text](images/portforward-phpmyadmin.png)
+
+![alt text](images/phpmyadmin.png)

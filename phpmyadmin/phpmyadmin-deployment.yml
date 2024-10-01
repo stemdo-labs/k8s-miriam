@@ -18,6 +18,19 @@ spec:
         image: phpmyadmin:latest
         ports:
         - containerPort: 80
+        env:
+        - name: PMA_HOST
+          value: mysql-service.laravel
+        - name: PMA_USER
+          valueFrom:
+            secretKeyRef:
+              name: phpmyadmin-secret
+              key: DB_USERNAME
+        - name: PMA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: phpmyadmin-secret
+              key: DB_PASSWORD
         resources:
           requests:
             memory: "128Mi"
