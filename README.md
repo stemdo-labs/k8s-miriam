@@ -57,6 +57,14 @@
 
 ![alt text](images/laravel.png)
 
+- Otra opción es mediante el uso de un ``ingress``. Para ello primero se necesita un `ingress controller` que no deja de ser un ``deployment``, con una determinada configuración, que se encarga de gestionar el acceso externo a los servicios del clúster, redirigiendo el tráfico según reglas específicas y proporcionando funciones de balanceo de carga y seguridad, en pocas palabras, permite el acceso desde fuera del clúster.
+
+    Ahora pasamos al archivo `laravel-ingress.yml`, que este define reglas que controlan el acceso externo a los servicios del clúster, permitiendo la gestión del tráfico HTTP y HTTPS.
+
+    Por último, una vez configurado todo, podemos acceder a `laravel` desde el navegador sin hacer uso de `port forward`, simplemente debemos introducir la ip externa que le proporciona `ingress controller` a nuestro aplicativo `laravel`:
+
+    ![alt text](images/laravel-ingress.png)
+
 ## Aplicativo phpMyAdmin
 
 - Con la creación del clúster, el ``Namespace`` llamado ``phpmyadmin`` ya está creado, pero se ejecutaría el siguiente comando para crearlo:

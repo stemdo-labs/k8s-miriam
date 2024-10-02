@@ -8,4 +8,4 @@ spec:
     app: laravel
   ports:
   - port: 8000
-  type: NodePort
+  type: ClusterIP
